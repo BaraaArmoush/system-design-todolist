@@ -1,0 +1,40 @@
+Users:
+    id_user: int, primary_key, unique
+    email: string, unique
+
+TodoLists:
+    id_todo_list: int, primary_key, unique
+    id_user: int, foreign_key
+    name: string, not nullable
+    description: string
+    posistion: int, not nullable
+    priority: int, not nullable # (0 -> low, 1 -> medium, 2 -> high)
+    created_at: timestamp, default: current_timestamp
+    updated_at: timestamp, default: current_timestamp
+    
+    UNIQUE(posistion)
+
+Task:
+    id_task: int, primary_key, unique
+    id_todo_list: int, foreign_key
+    id_user: int, foreign_key
+    name: string, not nullable
+    description: string
+    posistion: int, not nullable
+    priority: int, not nullable # (0 -> low, 1 -> medium, 2 -> high)
+    status: int, not nullable # (0 -> TODO, 1 -> DONE)
+    created_at: timestamp, default: current_timestamp
+    updated_at: timestamp, default: current_timestamp
+    
+    UNIQUE(id_todo_list, posistion)
+
+Subtask:
+    id_subtask: int, primary_key, unique
+    id_task: int, foreign_key
+    id_user: int, foreign_key
+    name: string, not nullable
+    description: string
+    priority: int, not nullable # (0 -> low, 1 -> medium, 2 -> high)
+    status: int, not nullable # (0 -> TODO, 1 -> DONE)
+    created_at: timestamp, default: current_timestamp
+    updated_at: timestamp, default: current_timestamp

@@ -1,0 +1,196 @@
+#############################################
+################# TodoLists #################
+#############################################
+
+# Get Single TodoList
+GET /todo_lists/:id_todo_list
+<- {}
+-> {
+    id_todo_list: 12,
+    id_user: 1894,
+    name: 'Todo List 1',
+    description: 'This is Todo List 1',
+    posistion: 1,
+    priority: 0,
+    created_at: 2021-12-26T15:50:54.582Z,
+    updated_at: 2021-12-26T15:50:54.582Z
+}
+
+# Get List of TodoLists
+GET /todo_lists?page_num=2&page_size=10&user_id=1894
+<- {}
+-> {
+    [
+        {
+            id_todo_list: 12,
+            id_user: 1894,
+            name: 'Todo List 1',
+            description: 'This is Todo List 1',
+            posistion: 1,
+            priority: 0,
+            created_at: 2021-12-26T15:50:54.582Z,
+            updated_at: 2021-12-26T15:50:54.582Z
+        },
+        {
+            id_todo_list: 2,
+            id_user: 1894,
+            name: 'Todo List 2',
+            description: 'This is Todo List 2',
+            posistion: 2,
+            priority: 2,
+            created_at: 2021-12-26T15:50:54.582Z,
+            updated_at: 2021-12-26T15:50:54.582Z
+        },
+        {
+            id_todo_list: 6,
+            id_user: 1894,
+            name: 'Todo List 3',
+            description: 'This is Todo List 3',
+            posistion: 3,
+            priority: 1,
+            created_at: 2021-12-26T15:50:54.582Z,
+            updated_at: 2021-12-26T15:50:54.582Z
+        }
+    ]
+}
+
+# Create TodoList
+POST /todo_lists
+<- {
+    name: 'new todo list',
+    description: 'this is a new todo list',
+    priority: 0
+}
+-> <same as Get Single TodoList response>
+
+# Update Single TodoList
+PUT /todo_lists/:id_todo_list
+<- {
+    name: 'new todo list name',
+    description: 'this is a new todo list description',
+    priority: 5
+}
+-> <same as Get Single TodoList response>
+
+# Delete Single TodoList
+DELETE /todo_lists/:id_todo_list
+<- {}
+-> {
+    'deleted successfully'
+}
+
+# Swap Two TodoLists
+POST /todo_lists/swap
+<- {
+    'id_todo_list1': 123,
+    'id_todo_list2': 65
+}
+-> {
+    'swaped successfully'
+}
+
+#############################################
+################### Tasks ###################
+#############################################
+
+# Get Single Task
+GET /tasks/:id_task
+<- {}
+-> {
+    id_task: 1
+    id_todo_list: 12,
+    id_user: 1894,
+    name: 'Task 1',
+    description: 'This is Task 1',
+    posistion: 1,
+    priority: 0,
+    status: 0,
+    created_at: 2021-12-26T15:50:54.582Z,
+    updated_at: 2021-12-26T15:50:54.582Z
+}
+
+# Get List of Tasks
+GET /tasks?page_num=2&page_size=10&id_todo_list=12
+<- {}
+-> {
+    [
+        {
+            id_task: 1
+            id_todo_list: 12,
+            id_user: 1894,
+            name: 'Task 1',
+            description: 'This is Task 1',
+            posistion: 1,
+            priority: 0,
+            status: 0,
+            created_at: 2021-12-26T15:50:54.582Z,
+            updated_at: 2021-12-26T15:50:54.582Z
+        },
+        {
+            id_task: 5
+            id_todo_list: 12,
+            id_user: 1219,
+            name: 'Task 2',
+            description: 'This is Task 2',
+            posistion: 2,
+            priority: 0,
+            status: 0,
+            created_at: 2021-12-26T15:50:54.582Z,
+            updated_at: 2021-12-26T15:50:54.582Z
+        },
+        {
+            id_task: 76
+            id_todo_list: 12,
+            id_user: 1154,
+            name: 'Task 4',
+            description: 'This is Task 5',
+            posistion: 3,
+            priority: 2,
+            status: 1,
+            created_at: 2021-12-26T15:50:54.582Z,
+            updated_at: 2021-12-26T15:50:54.582Z
+        }
+    ]
+}
+
+# Create Task
+POST /tasks
+<- {
+    name: 'new task',
+    description: 'this is a new task',
+    priority: 0
+}
+-> <same as Get Single Task response>
+
+# Update Single Task
+PUT /tasks/:id_task
+<- {
+    name: 'new task name',
+    description: 'this is a new task description',
+    priority: 2
+}
+-> <same as Get Single Task response>
+
+# Delete Single Task
+DELETE /tasks/:id_task
+<- {}
+-> {
+    'deleted successfully'
+}
+
+# Swap Two Tasks
+POST /tasks/swap
+<- {
+    'id_task1': 123,
+    'id_task2': 65
+}
+-> {
+    'swaped successfully'
+}
+
+############################################
+################# Subtasks #################
+############################################
+
+same as task
+more filters on GET list (id_task)
